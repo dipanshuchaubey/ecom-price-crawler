@@ -31,7 +31,7 @@ export const crawlerForFlipkart = (func, item) => {
   console.log(
     item + ' [Flipkart]: ' + func('div[class="_30jeq3 _16Jk6d"]').text()
   )
-  return exports.stringToNumber(func('div[class="_30jeq3 _16Jk6d"]').text())
+  return stringToNumber(func('div[class="_30jeq3 _16Jk6d"]').text())
 }
 
 /**
