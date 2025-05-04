@@ -1,10 +1,10 @@
-const Crawler = require('crawler')
-const URL = require('./items')
-const {
+import Crawler from 'crawler'
+import URL from './items.js'
+import {
   getWebsiteFromURL,
   crawlerForFlipkart,
   crawlerForAmazon
-} = require('./utils')
+} from './utils.js'
 
 URL.forEach(item => {
   const c = new Crawler({
@@ -14,7 +14,7 @@ URL.forEach(item => {
       if (error) {
         console.error(error)
       } else {
-        var $ = res.$
+        const cr_func = res.$
         let price
 
         /**
@@ -27,9 +27,9 @@ URL.forEach(item => {
          *
          */
         if (getWebsiteFromURL(item.url, 'flipkart')) {
-          price = crawlerForFlipkart($, item.name)
+          price = crawlerForFlipkart(cr_func, item.name)
         } else if (getWebsiteFromURL(item.url, 'amazon')) {
-          price = crawlerForAmazon($, item.name)
+          price = crawlerForAmazon(cr_func, item.name)
         } else {
           console.log('Invalid URL')
         }
@@ -45,6 +45,6 @@ URL.forEach(item => {
 
   // Crawl Rates after an interval
   setInterval(() => {
-    c.queue(item.url)
+    c.add(item.url)
   }, 1000 * 60 * 1)
 })

@@ -4,7 +4,7 @@
  * @param {String} websiteName
  * @returns {Boolean}
  */
-exports.getWebsiteFromURL = (url, websiteName) => {
+export const getWebsiteFromURL = (url, websiteName) => {
   if (url.replace(/(http:\/\/|https:\/\/)(www.)/, '').startsWith(websiteName)) {
     return true
   }
@@ -17,7 +17,7 @@ exports.getWebsiteFromURL = (url, websiteName) => {
  * @param {String} string
  * @returns {Number}
  */
-exports.stringToNumber = string => {
+export const stringToNumber = string => {
   return +string.replace('₹', '')
 }
 
@@ -27,9 +27,11 @@ exports.stringToNumber = string => {
  * @param {String} item
  * @returns {Number}
  */
-exports.crawlerForFlipkart = ($, item) => {
-  console.log(item + ' [Flipkart]: ' + $('div[class="_30jeq3 _16Jk6d"]').text())
-  return exports.stringToNumber($('div[class="_30jeq3 _16Jk6d"]').text())
+export const crawlerForFlipkart = (func, item) => {
+  console.log(
+    item + ' [Flipkart]: ' + func('div[class="_30jeq3 _16Jk6d"]').text()
+  )
+  return exports.stringToNumber(func('div[class="_30jeq3 _16Jk6d"]').text())
 }
 
 /**
@@ -38,7 +40,7 @@ exports.crawlerForFlipkart = ($, item) => {
  * @param {String} item
  * @returns {Number}
  */
-exports.crawlerForAmazon = ($, item) => {
+export const crawlerForAmazon = ($, item) => {
   let result
 
   if ((result = $('span[id="priceblock_dealprice"]').text().trim())) {
